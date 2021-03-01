@@ -23,7 +23,14 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
@@ -32,7 +39,14 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.*
+import androidx.compose.material.Card
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
+import androidx.compose.material.Text
+import androidx.compose.material.TextField
+import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Clear
 import androidx.compose.material.icons.outlined.Search
@@ -57,12 +71,17 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.NavHostFragment.findNavController
 import com.example.androiddevchallenge.data.DataDummy
 import com.example.androiddevchallenge.model.Animal
 import com.example.androiddevchallenge.model.Category
 import com.example.androiddevchallenge.model.Type
-import com.example.androiddevchallenge.ui.theme.*
+import com.example.androiddevchallenge.ui.theme.MyTheme
+import com.example.androiddevchallenge.ui.theme.gray
+import com.example.androiddevchallenge.ui.theme.grayLight
+import com.example.androiddevchallenge.ui.theme.orange
+import com.example.androiddevchallenge.ui.theme.orangeLight
+import com.example.androiddevchallenge.ui.theme.purple
+import com.example.androiddevchallenge.ui.theme.purpleLight
 
 class HomeFragment : Fragment() {
     @ExperimentalComposeUiApi
@@ -355,7 +374,6 @@ fun PuppyItem(animal: Animal) {
         }
     }
 }
-
 
 @Preview
 @Composable
