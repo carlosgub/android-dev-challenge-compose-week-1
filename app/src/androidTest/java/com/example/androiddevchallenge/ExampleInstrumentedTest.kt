@@ -29,7 +29,7 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class ExampleInstrumentedTest {
     @get:Rule
-    val composeTestRule = createAndroidComposeRule<HomeFragment>()
+    val composeTestRule = createAndroidComposeRule<MainActivity>()
 
     @Test
     fun sampleTest() {
