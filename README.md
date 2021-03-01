@@ -6,7 +6,7 @@
 
 
 ## :scroll: Description
-This is an dummy application for animal adoptions for miaullido an ONG in Peru
+This is an dummy application for animal adoptions.
 
 
 ## :bulb: Motivation and Context
