@@ -190,7 +190,7 @@ fun Description() {
 fun ButtonBottom() {
     Row(
         modifier = Modifier
-            .padding(start = 12.dp, end = 12.dp,bottom =12.dp)
+            .padding(start = 12.dp, end = 12.dp, bottom = 12.dp)
     ) {
         Button(
             onClick = {},
@@ -221,7 +221,6 @@ fun ButtonBottom() {
     }
 }
 
-
 @ExperimentalComposeUiApi
 @Preview("Light Theme", widthDp = 360, heightDp = 640)
 @Composable
@@ -239,4 +238,3 @@ fun DarkDetailPreview() {
         DetailApp()
     }
 }
-
