@@ -15,10 +15,6 @@
  */
 package com.example.androiddevchallenge
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -60,7 +56,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
@@ -70,7 +65,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
+import androidx.navigation.compose.navigate
+import androidx.navigation.compose.rememberNavController
 import com.example.androiddevchallenge.data.DataDummy
 import com.example.androiddevchallenge.model.Animal
 import com.example.androiddevchallenge.model.Category
@@ -83,31 +80,14 @@ import com.example.androiddevchallenge.ui.theme.orangeLight
 import com.example.androiddevchallenge.ui.theme.purple
 import com.example.androiddevchallenge.ui.theme.purpleLight
 
-class HomeFragment : Fragment() {
-    @ExperimentalComposeUiApi
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        return ComposeView(requireContext()).apply {
-            setContent {
-                MyTheme {
-                    MyApp()
-                }
-            }
-        }
-    }
-}
-
 @ExperimentalComposeUiApi
 @Composable
-fun MyApp() {
+fun MyApp(navController: NavController) {
     Surface(color = MaterialTheme.colors.background) {
         Column {
             Toolbar()
             Search()
-            Body()
+            Body(navController)
         }
     }
 }
@@ -179,7 +159,8 @@ fun Search() {
             modifier = Modifier
                 .fillMaxWidth(),
             shape = RoundedCornerShape(8.dp),
-            border = BorderStroke(1.dp, grayLight)
+            border = BorderStroke(1.dp, grayLight),
+            backgroundColor = Color.White
         ) {
             Row {
                 val (query, setQuery) = remember { mutableStateOf("") }
@@ -214,7 +195,6 @@ fun Search() {
                 IconButton(
                     onClick = {},
                     modifier = Modifier
-                        .padding(start = 8.dp)
                         .clip(RoundedCornerShape(10.dp))
                         .background(purple)
                         .size(52.dp)
@@ -234,7 +214,7 @@ fun Search() {
 }
 
 @Composable
-fun Body() {
+fun Body(navController: NavController) {
     val lazyListState = rememberLazyListState()
     LazyColumn(
         state = lazyListState
@@ -251,8 +231,8 @@ fun Body() {
                         .fillMaxHeight(),
                     horizontalArrangement = Arrangement.SpaceEvenly
                 ) {
-                    PuppyItem(animals[i * 2])
-                    PuppyItem(animals[i * 2 + 1])
+                    PuppyItem(animals[i * 2], navController)
+                    PuppyItem(animals[i * 2 + 1], navController)
                 }
             }
         }
@@ -264,6 +244,7 @@ fun Categories() {
     LazyRow(
         modifier = Modifier
             .padding(start = 6.dp)
+            .clickable { }
     ) {
         items(DataDummy.getCategories().toList()) {
             CategoriesItem(
@@ -308,14 +289,14 @@ fun CategoriesItem(category: Category) {
 }
 
 @Composable
-fun PuppyItem(animal: Animal) {
+fun PuppyItem(animal: Animal, navController: NavController) {
     Card(
         modifier = Modifier
             .size(height = 270.dp, width = 200.dp)
             .fillMaxWidth()
             .padding(start = 12.dp, end = 8.dp, top = 8.dp, bottom = 8.dp)
             .clickable {
-//                findNavController().navigate(R.id.viewToDetail)
+                navController.navigate("detail")
             },
         shape = RoundedCornerShape(20.dp)
     ) {
@@ -388,7 +369,7 @@ fun CategoriesItemPreview() {
 @Composable
 fun LightPreview() {
     MyTheme {
-        MyApp()
+        MyApp(rememberNavController())
     }
 }
 
@@ -397,6 +378,6 @@ fun LightPreview() {
 @Composable
 fun DarkPreview() {
     MyTheme(darkTheme = true) {
-        MyApp()
+        MyApp(rememberNavController())
     }
 }
