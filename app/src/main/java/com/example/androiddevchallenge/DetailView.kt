@@ -48,6 +48,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.androiddevchallenge.data.DataDummy
+import com.example.androiddevchallenge.model.Animal
 import com.example.androiddevchallenge.ui.theme.MyTheme
 import com.example.androiddevchallenge.ui.theme.gray
 import com.example.androiddevchallenge.ui.theme.grayLight
@@ -56,13 +58,13 @@ import com.example.androiddevchallenge.ui.theme.purpleLight
 
 @ExperimentalComposeUiApi
 @Composable
-fun DetailApp() {
+fun DetailApp(animal: Animal) {
     Surface(color = MaterialTheme.colors.background) {
         LazyColumn {
             item {
                 Image(
-                    painter = painterResource(R.drawable.corgi_large),
-                    contentDescription = "profile",
+                    painter = painterResource(animal.image),
+                    contentDescription = "dog photo",
                     contentScale = ContentScale.FillWidth,
                     modifier = Modifier
                         .fillMaxWidth()
@@ -88,12 +90,12 @@ fun DetailApp() {
                     )
                     InfoCard(
                         title = "Sex",
-                        description = "Female"
+                        description = animal.gender.text
                     )
                 }
             }
 
-            item { Description() }
+            item { Description(animal) }
 
             item { ButtonBottom() }
         }
@@ -133,14 +135,14 @@ fun InfoCard(title: String, description: String) {
 }
 
 @Composable
-fun Description() {
+fun Description(animal: Animal) {
     Column(
         modifier = Modifier
             .padding(16.dp)
     ) {
         Row {
             Text(
-                text = "Nora",
+                text = animal.name,
                 style = MaterialTheme.typography.subtitle1.copy(
                     fontWeight = FontWeight.Bold
                 )
@@ -150,7 +152,7 @@ fun Description() {
                     .weight(1f)
             )
             Text(
-                text = "Corgi",
+                text = animal.race,
                 style = MaterialTheme.typography.subtitle1
             )
         }
@@ -226,7 +228,7 @@ fun ButtonBottom() {
 @Composable
 fun LightDetailPreview() {
     MyTheme {
-        DetailApp()
+        DetailApp(DataDummy.getAnimalDummy())
     }
 }
 
@@ -235,6 +237,6 @@ fun LightDetailPreview() {
 @Composable
 fun DarkDetailPreview() {
     MyTheme(darkTheme = true) {
-        DetailApp()
+        DetailApp(DataDummy.getAnimalDummy())
     }
 }

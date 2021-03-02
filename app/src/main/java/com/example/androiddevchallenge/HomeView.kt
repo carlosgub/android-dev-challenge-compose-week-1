@@ -296,6 +296,8 @@ fun PuppyItem(animal: Animal, navController: NavController) {
             .fillMaxWidth()
             .padding(start = 12.dp, end = 8.dp, top = 8.dp, bottom = 8.dp)
             .clickable {
+                navController.currentBackStackEntry
+                    ?.arguments?.putParcelable("animal", animal)
                 navController.navigate("detail")
             },
         shape = RoundedCornerShape(20.dp)

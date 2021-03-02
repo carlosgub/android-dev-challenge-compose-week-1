@@ -20,7 +20,7 @@ enum class Type(val text: String) {
     ADULT("Adult")
 }
 
-enum class Gender {
-    M,
-    F
+enum class Gender(val text: String) {
+    M("Male"),
+    F("Female")
 }

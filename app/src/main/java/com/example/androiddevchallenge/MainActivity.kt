@@ -22,6 +22,7 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.androiddevchallenge.model.Animal
 import com.example.androiddevchallenge.ui.theme.MyTheme
 
 class MainActivity : AppCompatActivity() {
@@ -38,7 +39,9 @@ class MainActivity : AppCompatActivity() {
                 }
                 composable("detail") {
                     MyTheme {
-                        DetailApp()
+                        val animal = navController.previousBackStackEntry
+                            ?.arguments?.getParcelable<Animal>("animal")
+                        DetailApp(animal = animal!!)
                     }
                 }
             }

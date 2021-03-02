@@ -76,5 +76,14 @@ class DataDummy {
                 )
             )
         }
+
+        fun getAnimalDummy() =
+            Animal(
+                image = R.drawable.french,
+                name = "Matty",
+                gender = Gender.M,
+                race = "French bulldog",
+                type = Type.PUPPY
+            )
     }
 }
